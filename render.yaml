@@ -1,6 +1,7 @@
 services:
   - type: web
     name: coffee-inventory-system
+    env: docker
     plan: free
     region: singapore
-    runtime: docker
+    branch: main
