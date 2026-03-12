@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h3 mb-1">Inventory Dashboard</h1>
-            <p class="text-muted mb-0">Manage your coffee shop stock and supplies</p>
+            
         </div>
         <div class="d-flex align-items-center">
             <!-- Quick Stats -->
@@ -192,150 +192,151 @@
         </div>
     @endif
 
-    <!-- Inventory Table -->
     <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover mb-0" id="inventory-table">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="ps-4">Item Name</th>
-                            <th>Category</th>
-                            <th>Current Stock</th>
-                            <th>Unit</th>
-                            <th>Cost/Unit</th>
-                            <th>Supplier</th>
-                            <th>Reorder Point</th>
-                            <th>Status</th>
-                            <th>Stock Level</th>
-                            <th>Expiry Status</th>
-                            <th class="text-end pe-4">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($items as $item)
-                            @php
-                                $statusClass = [
-                                    'safe' => ['class' => 'success', 'icon' => 'fa-check-circle', 'text' => 'Safe', 'row_class' => ''],
-                                    'low' => ['class' => 'warning', 'icon' => 'fa-exclamation-triangle', 'text' => 'Low Stock', 'row_class' => 'table-warning'],
-                                    'out' => ['class' => 'danger', 'icon' => 'fa-times-circle', 'text' => 'Out of Stock', 'row_class' => 'table-danger']
-                                ][$item->stock_status];
-                            @endphp
-                          
-                            <tr class="inventory-item" data-status="{{ $item->stock_status }}">
-                                <td class="ps-4 fw-medium">
-                                    <div>{{ $item->name }}</div>
-                                    @if($item->sku)
-                                        <small class="text-muted">SKU: {{ $item->sku }}</small>
-                                    @endif
-                                </td>
-                                <td>
-                                    <span class="badge bg-light text-dark">
-                                        {{ $item->category?->name ?? 'Uncategorized' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="fw-bold">{{ $item->quantity }}</span>
-                                </td>
-                                <td>
-                                    <span class="text-muted">{{ $item->unit->abbreviation ?? 'N/A' }}</span>
-                                </td>
-                                <td>
-                                    <span class="fw-medium">₱{{ number_format($item->cost_per_unit, 2) }}</span>
-                                </td>
-                                <td>
-                                    <span class="text-muted small">{{ $item->supplier?->name ?? 'N/A' }}</span>
-                                </td>
-                                <td>
-                                    <span class="text-muted">{{ $item->reorder_point }}</span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-{{ $statusClass['class'] }}">
-                                        <i class="fas {{ $statusClass['icon'] }} me-1"></i>{{ $statusClass['text'] }}
-                                    </span>
-                                </td>
-                                <td style="width: 180px;">
-                                    <div class="d-flex align-items-center">
-                                        <div class="progress flex-grow-1" style="height: 8px;">
-                                            <div class="progress-bar bg-{{ $statusClass['class'] }}" 
-                                                 style="width:{{ $item->stock_percentage }}%">
-                                            </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0" id="inventory-table">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Item Name</th>
+                        <th>Category</th>
+                        <th>Current Stock</th>
+                        <th>Unit</th>
+                        <th>Cost/Unit</th>
+                        <th>Supplier</th>
+                        <th>Reorder Point</th>
+                        <th>Status</th>
+                        <th>Stock Level</th>
+                        <th>Expiry Status</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($items as $item)
+                        @php
+                            $statusClass = [
+                                'safe' => ['class' => 'success', 'icon' => 'fa-check-circle', 'text' => 'Safe', 'row_class' => ''],
+                                'low' => ['class' => 'warning', 'icon' => 'fa-exclamation-triangle', 'text' => 'Low Stock', 'row_class' => 'table-warning'],
+                                'out' => ['class' => 'danger', 'icon' => 'fa-times-circle', 'text' => 'Out of Stock', 'row_class' => 'table-danger']
+                            ][$item->stock_status];
+                        @endphp
+                      
+                        <tr class="inventory-item" data-status="{{ $item->stock_status }}">
+                            <td class="ps-4 fw-medium">
+                                <div>{{ $item->name }}</div>
+                                @if($item->sku)
+                                    <small class="text-muted">SKU: {{ $item->sku }}</small>
+                                @endif
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark">
+                                    {{ $item->category?->name ?? 'Uncategorized' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="fw-bold">{{ (int)$item->quantity }}</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">{{ $item->unit->abbreviation ?? 'N/A' }}</span>
+                            </td>
+                            <td>
+                                <span class="fw-medium">₱{{ number_format($item->cost_per_unit, 2) }}</span>
+                            </td>
+                            <td>
+                                <span class="text-muted small">{{ $item->supplier?->name ?? 'N/A' }}</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">{{ (int)$item->reorder_point }}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-{{ $statusClass['class'] }}">
+                                    <i class="fas {{ $statusClass['icon'] }} me-1"></i>{{ $statusClass['text'] }}
+                                </span>
+                            </td>
+                            <td style="width: 180px;">
+                                <div class="d-flex align-items-center">
+                                    <div class="progress flex-grow-1" style="height: 8px;">
+                                        <div class="progress-bar bg-{{ $statusClass['class'] }}" 
+                                             style="width:{{ $item->stock_percentage }}%">
                                         </div>
-                                        <small class="text-muted ms-2">{{ round($item->stock_percentage) }}%</small>
                                     </div>
-                                </td>
-                                <td>
-                                    @if($item->is_perishable && $item->expiry_date)
-                                        <span class="badge bg-{{ $item->expiry_status_color }}">
-                                            <i class="fas 
-                                                @if($item->expiry_status == 'expired') fa-exclamation-triangle
-                                                @elseif($item->expiry_status == 'expires-soon') fa-exclamation-circle
-                                                @elseif($item->expiry_status == 'expires-today') fa-skull-crossbones
-                                                @else fa-check-circle
-                                                @endif
-                                            me-1"></i>
-                                            {{ $item->expiry_status_text }}
-                                            @if($item->days_until_expiry !== null)
-                                                <br><small>({{ $item->days_until_expiry }} days)</small>
+                                    <small class="text-muted ms-2">{{ round($item->stock_percentage) }}%</small>
+                                </div>
+                            </td>
+                            <td>
+                                @if($item->is_perishable && $item->expiry_date)
+                                    <span class="badge bg-{{ $item->expiry_status_color }}">
+                                        <i class="fas 
+                                            @if($item->expiry_status == 'expired') fa-exclamation-triangle
+                                            @elseif($item->expiry_status == 'expires-soon') fa-exclamation-circle
+                                            @elseif($item->expiry_status == 'expires-today') fa-skull-crossbones
+                                            @else fa-check-circle
                                             @endif
-                                        </span>
-                                    @else
-                                        <span class="badge bg-secondary">Non-Perishable</span>
-                                    @endif
-                                </td>
-                                <td class="text-end pe-4">
-    <div class="btn-group btn-group-sm">
-        <button class="btn btn-outline-primary edit-btn"
-                data-id="{{ $item->id }}"
-                data-name="{{ $item->name }}"
-                data-quantity="{{ $item->quantity }}"
-                data-reorder="{{ $item->reorder_point }}"
-                data-category="{{ $item->category_id }}"
-                data-supplier="{{ $item->supplier_id }}"
-                data-unit="{{ $item->unit_id }}"
-                data-cost="{{ $item->cost_per_unit }}"
-                data-sku="{{ $item->sku }}"
-                data-is-perishable="{{ $item->is_perishable }}"
-                data-expiry-date="{{ $item->expiry_date ? (\Carbon\Carbon::parse($item->expiry_date)->format('Y-m-d')) : '' }}"
-                data-manufacture-date="{{ $item->manufacture_date ? (\Carbon\Carbon::parse($item->manufacture_date)->format('Y-m-d')) : '' }}"
-                data-shelf-life-days="{{ $item->shelf_life_days }}"
-                data-batch-number="{{ $item->batch_number }}"
-                title="Edit Item">
-            <i class="fas fa-edit"></i>
-        </button>
+                                        me-1"></i>
+                                        {{ $item->expiry_status_text }}
+                                        @if($item->days_until_expiry !== null)
+                                            <br><small>({{ $item->days_until_expiry }} days)</small>
+                                        @endif
+                                    </span>
+                                @else
+                                    <span class="badge bg-secondary">Non-Perishable</span>
+                                @endif
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-primary edit-btn"
+                                            data-id="{{ $item->id }}"
+                                            data-name="{{ $item->name }}"
+                                            data-quantity="{{ (int)$item->quantity }}" {{-- CAST TO INT --}}
+                                            data-reorder="{{ (int)$item->reorder_point }}" {{-- CAST TO INT --}}
+                                            data-category="{{ $item->category_id }}"
+                                            data-supplier="{{ $item->supplier_id }}"
+                                            data-unit="{{ $item->unit_id }}"
+                                            data-cost="{{ $item->cost_per_unit }}"
+                                            data-sku="{{ $item->sku }}"
+                                            data-is-perishable="{{ $item->is_perishable }}"
+                                            data-expiry-date="{{ $item->expiry_date ? (\Carbon\Carbon::parse($item->expiry_date)->format('Y-m-d')) : '' }}"
+                                            data-manufacture-date="{{ $item->manufacture_date ? (\Carbon\Carbon::parse($item->manufacture_date)->format('Y-m-d')) : '' }}"
+                                            data-shelf-life-days="{{ $item->shelf_life_days }}"
+                                            data-batch-number="{{ $item->batch_number }}"
+                                            title="Edit Item">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
 
-        <button class="btn btn-outline-success restock-btn"
-                data-id="{{ $item->id }}"
-                data-name="{{ $item->name }}"
-                title="Restock Item">
-            <i class="fas fa-truck"></i>
-        </button>
+                                    <button class="btn btn-outline-success restock-btn"
+                                            data-id="{{ $item->id }}"
+                                            data-name="{{ $item->name }}"
+                                            title="Restock Item">
+                                        <i class="fas fa-truck"></i>
+                                    </button>
 
-                                        <button class="btn btn-outline-info usage-btn"
-                                                data-id="{{ $item->id }}"
-                                                data-name="{{ $item->name }}"
-                                                data-quantity="{{ $item->quantity }}"
-                                                data-unit="{{ $item->unit->abbreviation ?? '' }}"
-                                                title="Record Usage/Waste">
-                                            <i class="fas fa-utensils"></i>
-                                        </button>
+                                    <button class="btn btn-outline-info usage-btn"
+                                            data-id="{{ $item->id }}"
+                                            data-name="{{ $item->name }}"
+                                            data-quantity="{{ (int)$item->quantity }}" {{-- CAST TO INT --}}
+                                            data-unit="{{ $item->unit->abbreviation ?? '' }}"
+                                            title="Record Usage/Waste">
+                                        <i class="fas fa-utensils"></i>
+                                    </button>
 
-                                        @auth
-    @if(auth()->user()->canDeleteItems())
-        <button class="btn btn-outline-danger delete-btn"
-                data-id="{{ $item->id }}"
-                data-name="{{ $item->name }}"
-                title="Delete Item">
-            <i class="fas fa-trash"></i>
-        </button>
-    @endif
-@endauth
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                    @auth
+                                        @if(auth()->user()->canDeleteItems())
+                                            <button class="btn btn-outline-danger delete-btn"
+                                                    data-id="{{ $item->id }}"
+                                                    data-name="{{ $item->name }}"
+                                                    title="Delete Item">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        @endif
+                                    @endauth
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+   
             </div>
             
             <!-- Empty State -->

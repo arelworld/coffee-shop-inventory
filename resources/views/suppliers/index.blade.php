@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h3 mb-1">Supplier Management</h1>
-            <p class="text-muted mb-0">Manage your coffee shop suppliers and contacts</p>
+            
         </div>
         <div>
             <a href="{{ route('suppliers.create') }}" class="btn btn-primary">
@@ -91,7 +91,7 @@
             <i class="fas fa-truck fa-3x text-muted"></i>
         </div>
         <h5 class="text-muted">No suppliers found</h5>
-        <p class="text-muted mb-3">Your sample suppliers will appear here</p>
+        
     </div>
     @endif
 </div>

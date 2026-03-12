@@ -17,8 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->nullable(); // Added for Contact
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['manager', 'staff'])->default('staff'); // Added
+            $table->boolean('is_active')->default(true); // Added
+            $table->timestamp('last_login_at')->nullable(); // Added for Last Login
             $table->rememberToken();
             $table->timestamps();
         });

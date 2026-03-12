@@ -15,16 +15,17 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-medium">Current Quantity</label>
-                <input type="number" name="quantity" class="form-control" min="0" step="0.01" placeholder="0" required>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-medium">Reorder Point</label>
-                <input type="number" name="reorder_point" class="form-control" min="0" step="0.01" placeholder="Set reorder level" required>
-                <div class="form-text">Alert when stock falls below this level</div>
-            </div>
-        </div>
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-medium">Current Quantity</label>
+        <input type="number" name="quantity" class="form-control" min="0" step="1" placeholder="0" required>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-medium">Reorder Point</label>
+        <input type="number" name="reorder_point" class="form-control" min="0" step="1" placeholder="Set reorder level" required>
+        <div class="form-text">Alert when stock falls below this level</div>
+    </div>
+</div>
+
 
         <div class="row">
             <div class="col-md-6 mb-3">

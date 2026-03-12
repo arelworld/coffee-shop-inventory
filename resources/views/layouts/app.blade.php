@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Coffee Shop Inventory Management')</title>
+    <title>@yield('title', 'KOFI Shop Inventory Management')</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -195,9 +195,9 @@
             <button type="button" id="sidebarCollapse" class="btn btn-light">
                 <i class="fas fa-bars"></i>
             </button>
-            <a class="navbar-brand ms-2" href="{{ route('items.index') }}">
-                <i class="fas fa-coffee me-2 text-primary"></i>Coffee Inventory Pro
-            </a>
+            <!-- <a class="navbar-brand ms-2" href="{{ route('items.index') }}">
+                <i class="fas fa-coffee me-2 text-primary"></i>KOFI Inventory 
+            </a> -->
             
             <div class="d-flex align-items-center">
                 <!-- Replace the entire user dropdown section with this -->
@@ -233,7 +233,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <a href="{{ route('items.index') }}" class="brand">
-                    <i class="fas fa-coffee me-2"></i>Coffee Inventory
+                    <i class="fas fa-coffee me-2"></i>KOFI Inventory
                 </a>
             </div>
        <ul class="components">

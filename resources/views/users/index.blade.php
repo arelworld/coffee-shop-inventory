@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h3 mb-1">Staff Management</h1>
-            <p class="text-muted mb-0">Manage coffee shop staff accounts and permissions</p>
+         
         </div>
         <a href="{{ route('users.create') }}" class="btn btn-primary">
             <i class="fas fa-user-plus me-2"></i>Add Staff Member
@@ -109,9 +109,9 @@
                         <tr>
                             <th class="ps-4">Staff Member</th>
                             <th>Role</th>
-                            <th>Contact</th>
+                            <!-- <th>Contact</th> -->
                             <th>Status</th>
-                            <th>Last Login</th>
+                            <!-- <th>Last Login</th> -->
                             <th class="text-end pe-4">Actions</th>
                         </tr>
                     </thead>
@@ -139,20 +139,20 @@
                                     {{ ucfirst($user->role) }}
                                 </span>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <small class="text-muted">{{ $user->phone ?? 'No phone' }}</small>
-                            </td>
+                            </td> -->
                             <td>
                                 <span class="badge bg-{{ $user->is_active ? 'success' : 'danger' }}">
                                     <i class="fas {{ $user->is_active ? 'fa-check-circle' : 'fa-times-circle' }} me-1"></i>
                                     {{ $user->is_active ? 'Active' : 'Inactive' }}
                                 </span>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <small class="text-muted">
                                     {{ $user->last_login_at ? $user->last_login_at->diffForHumans() : 'Never' }}
                                 </small>
-                            </td>
+                            </td> -->
                             <td class="text-end pe-4">
                                 <div class="btn-group btn-group-sm">
                                     <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary" title="Edit User">

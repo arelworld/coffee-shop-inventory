@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Coffee Shop Inventory Dashboard')
+@section('title', 'KOFI Inventory Dashboard')
 
 @section('content')
 <div class="container-fluid py-4">
@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h3 mb-1">Inventory Dashboard</h1>
-            <p class="text-muted mb-0">Financial overview and business insights</p>
+            
         </div>
         <div>
             <a href="{{ route('items.index') }}" class="btn btn-outline-primary">
@@ -90,6 +90,8 @@
             </div>
         </div>
     </div>
+
+    
 
     <!-- Expiry Alerts -->
     @if($expiringSoonItems->count() > 0 || $expiredItems->count() > 0)
